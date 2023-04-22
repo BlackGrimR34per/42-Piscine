@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 void    hex_converter(char c);
+void	ft_putchar(char c);
 
 void    ft_putstr_non_printable(char *str)
 {
@@ -8,7 +9,7 @@ void    ft_putstr_non_printable(char *str)
 
     while (*str)
     {
-        if (*str < 32 || *str == 127)
+        if ((*str >= 0 && *str <= 31) || *str == 127)
             hex_converter(*str);
         else
             write(1, str, 1);
@@ -19,31 +20,15 @@ void    ft_putstr_non_printable(char *str)
 void    hex_converter(char c)
 {
     int nb = c;
-    int count = 0;
-    int i;
-    char output[2];
     char mapping[] = "0123456789abcdef";
 
-    while (nb)
-    {
-        count++;
-        nb /= 16;
-    }
+    ft_putchar('\\');
 
-    if (count == 1)
-        count++;
+    ft_putchar(mapping[nb / 16]);
+    ft_putchar(mapping[nb % 16]);
+}
 
-    i = count;
-    nb = c;
-    while (i--)
-    {
-        output[i] = mapping[nb % 16];
-        nb /= 16;
-    }
-
-    write(1, "\\", 1);
-    i = 0;
-    while (i < count)
-        write(1, &output[i++], 1);
-
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
