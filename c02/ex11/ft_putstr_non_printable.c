@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 void    hex_converter(char c);
 
 void    ft_putstr_non_printable(char *str)
